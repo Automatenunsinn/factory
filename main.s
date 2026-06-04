@@ -1,6 +1,9 @@
 | MC68331CAG16
 | Based on CPU32 instruction set
     .section .text
+    .org 0x1100
+    .long 0x182d
+    .long start
     .org 0x1500
 	.globl start
 start:

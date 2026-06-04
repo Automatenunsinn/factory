@@ -22,10 +22,10 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-artifact@v7
       with:
-        path: factory_raw.bin
+        path: factory.bin
 
     - name: Update release
       uses: softprops/action-gh-release@v3
       with:
         tag_name: mt
-        files: factory_raw.bin
+        files: factory.bin
