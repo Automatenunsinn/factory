@@ -1,0 +1,31 @@
+name: Build
+
+on:
+  [push,pull_request]
+
+jobs:
+  build:
+    permissions: write-all
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install binutils
+      uses: awalsh128/cache-apt-pkgs-action@v1.6.0
+      with:
+        packages: binutils-m68k-linux-gnu
+        
+    - name: Build
+      run: ./build.sh
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v7
+      with:
+        path: factory_raw.bin
+
+    - name: Update release
+      uses: softprops/action-gh-release@v3
+      with:
+        tag_name: mt
+        files: factory_raw.bin
