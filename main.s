@@ -1,15 +1,25 @@
 | MC68331CAG16
 | Based on CPU32 instruction set
+
+| Build-time parameters (override with as --defsym, see Makefile):
+.ifndef TYPE
+	.set TYPE, 0x31415926
+.endif
+.ifndef NVRAM_SIZE
+	.set NVRAM_SIZE, 0x80000
+.endif
+
     .section .text
 
 	.org 0x1000                     | header
-    .long 0x182d                    | checksum?
-    .long die+1                     | length
-	.long 0xffffead0
-	.long 0x31415926				| type
+_base:
+    .long 0x182d                    | checksum
+    .long (die - _base) + 0x1000 + 1 | length = die address + 1
+	.long 0xffffead0				| ???
+	.long TYPE						| type
 
 	.org 0x1100
-	.long 0x80000					| nvram size/stack pointer vector
+	.long NVRAM_SIZE				| nvram size/stack pointer vector
 	.long start
 
     .org 0x1500

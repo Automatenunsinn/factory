@@ -17,15 +17,15 @@ jobs:
         packages: binutils-m68k-linux-gnu
         
     - name: Build
-      run: ./build.sh
+      run: make all
 
     - name: Upload artifact
       uses: actions/upload-artifact@v7
       with:
-        path: factory.bin
+        path: factory_*.bin
 
     - name: Update release
       uses: softprops/action-gh-release@v3
       with:
         tag_name: mt
-        files: factory.bin
+        files: factory_*.bin
