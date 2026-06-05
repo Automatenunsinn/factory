@@ -3,11 +3,14 @@
     .section .text
 
 	.org 0x1000                     | header
-	| empty for now
+    .long 0x182d                    | checksum?
+    .long die+1                     | length
+	.long 0xffffead0
+	.long 0x31415926				| type
 
 	.org 0x1100
-    .long 0x182d                    | stack pointer vector?
-    .long start                     | reset vector
+	.long 0x80000					| nvram size/stack pointer vector
+	.long start
 
     .org 0x1500
 	.globl start
