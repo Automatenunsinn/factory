@@ -36,7 +36,7 @@ loop:
 	bra.b	loop
 
 finish:
-	clr.l	0x00001000
+	clr.l	0x00001000:l
 
 	move.l	#0x494e4954, 0x00fffd00 | ascii INIT
 
