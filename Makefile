@@ -22,19 +22,22 @@ HDRSKIP := 4096                 # bytes of header stripped from the raw image
 
 # -- Build configurations ----------------------------------------------------
 # name        type            nvram size
-CONFIGS := default small large
+CONFIGS := 512KB ALT1MB 1MBRD 2MB
 
-default_TYPE  := 0x31415926
-default_NVRAM := 0x80000
+512KB_TYPE  	:= 0x31415926
+512KB_NVRAM 	:= 0x80000
 
-small_TYPE    := 0x31415926
-small_NVRAM   := 0x40000
+ALT1MB_TYPE    	:= 0x61647002
+ALT1MB_NVRAM   	:= 0x80000
 
-large_TYPE    := 0x31415926
-large_NVRAM   := 0x100000
+1MBRD_TYPE   	:= 0x61640302
+1MBRD_NVRAM  	:= 0x80000
+
+2MB_TYPE    	:= 0x61640403
+2MB_NVRAM   	:= 0x200000
 # ----------------------------------------------------------------------------
 
-DEFAULT_CONFIG := default
+DEFAULT_CONFIG := 512KB
 BINS := $(foreach c,$(CONFIGS),factory_$(c).bin)
 
 .PHONY: all clean list $(CONFIGS)
@@ -45,7 +48,7 @@ factory.bin: factory_$(DEFAULT_CONFIG).bin
 
 all: $(BINS)
 
-# Named target per config, e.g. `make small` -> factory_small.bin
+# Named target per config, e.g. `make ALT1MB` -> factory_ALT1MB.bin
 $(CONFIGS): %: factory_%.bin
 
 # Pattern rule: assemble + extract the binary for any config.
