@@ -1,11 +1,8 @@
-# factory
-Clears NVRAM
-
 ```mermaid
 ---
 title: Factory
 config:
-  theme: light
+  theme: neutral
   themeVariables:
     fontFamily: "Bahnschrift Light"
 ---
@@ -17,6 +14,6 @@ flowchart TD
     E --> D
     D -->|A0 <= A1| F[Clear long at 0x1000]
     F --> G[Write INIT to 0x00fffd00]
-    G --> H[JSR to vector at 0x408]
-    H --> I[Infinite loop at die]
+    G --> H[Jump back to Loader at 0x408]
+    H --> I[Infinite loop]
 ```
