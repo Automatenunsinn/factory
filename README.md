@@ -1,9 +1,14 @@
 # factory
-clears nvram
-
-## Flowchart
+Clears NVRAM
 
 ```mermaid
+---
+title: Factory
+config:
+  theme: light
+  themeVariables:
+    fontFamily: "Bahnschrift Light"
+---
 flowchart TD
     A[start] --> B[Setup: A0 = 0x10000]
     B --> C[Setup: A1 = 0 - 0x100 = -0x100]
