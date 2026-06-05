@@ -25,9 +25,9 @@ _base:
     .org 0x1500
 	.globl start
 start:
-	movea.l	$0x10000, %a0
+	movea.l	#0x10000, %a0
 	movea.l	0x00000000:w, %a1       | stack pointer vector
-	suba.l	$0x100, %a1             | do not clear the stack
+	suba.l	#0x100, %a1             | do not clear the stack
 
 loop:
 	cmpa.l	%a1, %a0                | arrived at stack - 0x100 ?
@@ -38,9 +38,9 @@ loop:
 finish:
 	clr.l	0x00001000
 
-	move.l	$0x494e4954, 0x00fffd00 | ascii INIT
+	move.l	#0x494e4954, 0x00fffd00 | ascii INIT
 
-	movea.w	$0x408, %a0
+	movea.w	#0x408, %a0
 	jsr	(%a0)                       | jump to loader
 
 die:
