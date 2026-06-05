@@ -2,12 +2,11 @@
 ---
 title: Factory
 config:
-  theme: neutral
   themeVariables:
     fontFamily: "Bahnschrift Light"
 ---
 flowchart TD
-    A[start] --> B[Setup: A0 = 0x10000]
+    A[Start] --> B[Setup: A0 = 0x10000]
     B --> C[Setup: A1 = 0 - 0x100 = -0x100]
     C --> D[Loop: compare A0 to A1]
     D -->|A0 > A1| E[Clear long at A0 and post-increment A0]
