@@ -20,7 +20,7 @@ _base:
 
 	.org 0x1100
 	.long NVRAM_SIZE				| nvram size/stack pointer vector
-	.long start
+	.long (start - _base) + 0x1000	| start address
 
     .org 0x1500
 	.globl start
