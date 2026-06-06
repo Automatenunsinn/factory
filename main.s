@@ -21,8 +21,7 @@ _base:
 	.long 0							| 0x10 sram_start
 	.long 0							| 0x14 sram_end
 
-	.fill 52, 0						| 0x18 copyright_string[52]
-
+	.org 0x104c	
 	.long (start - _base) + 0x1000	| 0x4C start_address
 	.long ~((start - _base) + 0x1000) | 0x50 start_address_inv = ~start_address
 
