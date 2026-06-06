@@ -11,14 +11,22 @@
 
     .section .text
 
-	.org 0x1000                     | header
+	.org 0x1000                     | header (struct DB_XC_FILE_HEADER)
 _base:
-    .long 0x182d                    | checksum
-    .long (die - _base) + 0x1000 + 1 | length = die address + 1
-	.long 0xffffead0				| ???
-	.long TYPE						| type
+    .long 0x182d                    | 0x00 checksum
+    .long (die - _base) + 0x1000 + 1 | 0x04 length = die address + 1
+	.long ~((die - _base) + 0x1000 + 1) | 0x08 length_inv = ~length
+	.long TYPE						| 0x0C image_type
 
-	.org 0x1100
+	.long 0							| 0x10 sram_start
+	.long 0							| 0x14 sram_end
+
+	.fill 52, 0						| 0x18 copyright_string[52]
+
+	.long (start - _base) + 0x1000	| 0x4C start_address
+	.long ~((start - _base) + 0x1000) | 0x50 start_address_inv = ~start_address
+
+	.org 0x1100						| vector table
 	.long NVRAM_SIZE				| nvram size/stack pointer vector
 	.long (start - _base) + 0x1000	| start address
 
